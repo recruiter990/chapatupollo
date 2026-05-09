@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+
+/* ════════════════════════════════════════
+   THEME SYSTEM — CSS CUSTOM PROPERTIES
+   ════════════════════════════════════════ */
+
+:root {
+  --red: #C8102E;
+  --gold: #C9A050;
+  --green-accent: #4A7C59;
+  
+  /* Default to day mode */
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #EDE7DC;
+  --bg-card: #FFFFFF;
+  --bg-nav: rgba(245,240,232,0.96);
+  --text-primary: #1C1C1C;
+  --text-muted: #5A5248;
+  --border: #D8D0C4;
+  --overlay: rgba(245,240,232,0.7);
+}
+
+.day-mode {
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #EDE7DC;
+  --bg-card: #FFFFFF;
+  --bg-nav: rgba(245,240,232,0.96);
+  --text-primary: #1C1C1C;
+  --text-muted: #5A5248;
+  --border: #D8D0C4;
+  --overlay: rgba(245,240,232,0.7);
+}
+
+.night-mode {
+  --bg-primary: #111111;
+  --bg-secondary: #1A1A1A;
+  --bg-card: #222222;
+  --bg-nav: rgba(17,17,17,0.96);
+  --text-primary: #F5F0E8;
+  --text-muted: #A89F92;
+  --border: #333333;
+  --overlay: rgba(0,0,0,0.65);
+}
+
+/* ════════════════════════════════════════
+   BASE STYLES
+   ════════════════════════════════════════ */
+
+* {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ════════════════════════════════════════ */
+
+.animate-ready {
+  opacity: 0;
+  transform: translateY(36px);
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* ════════════════════════════════════════
+   HERO ENTRANCE ANIMATIONS
+   ════════════════════════════════════════ */
+
+.hero-animate {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.hero-animate.loaded {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+.hero-delay-1 { transition-delay: 0.1s; }
+.hero-delay-2 { transition-delay: 0.3s; }
+.hero-delay-3 { transition-delay: 0.5s; }
+.hero-delay-4 { transition-delay: 0.65s; }
+.hero-delay-5 { transition-delay: 0.8s; }
+
+/* ════════════════════════════════════════
+   GOLD SHIMMER ANIMATION
+   ════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #FFFFFF 0%,
+    #C9A050 25%,
+    #FFFFFF 50%,
+    #C9A050 75%,
+    #FFFFFF 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ════════════════════════════════════════
+   BOUNCING SCROLL INDICATOR
+   ════════════════════════════════════════ */
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-12px);
+  }
+  60% {
+    transform: translateY(-6px);
+  }
+}
+
+.bounce-animation {
+  animation: bounce 2s infinite;
+}
+
+/* ════════════════════════════════════════
+   3D CARD TILT (DESKTOP ONLY)
+   ════════════════════════════════════════ */
+
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 600px;
+}
+
+@media (hover: none) {
+  .tilt-card {
+    transform: none !important;
+  }
+}
+
+/* ════════════════════════════════════════
+   MENU TABS HORIZONTAL SCROLL
+   ════════════════════════════════════════ */
+
+.menu-tabs {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-tabs > * {
+  scroll-snap-align: start;
+}
+
+/* Hide scrollbar but keep functionality */
+.menu-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-tabs {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVE RULES
+   ════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .parallax-bg {
+    background-attachment: scroll !important;
+  }
+}
+
+/* ════════════════════════════════════════
+   FORM STYLES
+   ════════════════════════════════════════ */
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--red) !important;
+  outline: none;
+}
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
